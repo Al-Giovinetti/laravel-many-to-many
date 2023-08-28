@@ -15,6 +15,21 @@
                 <input type="text" name="title" id="title" value="{{ old('title','')}}">
             </div>
 
+            @error('technologies')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <div>
+                <label for="title" class="my-2 d-block"> <strong>Used technologies</strong></label>
+                @foreach($technologies as $technology)
+                    <input type="checkbox" name="technology" id="technology" value="{{$technology->id }}">
+                    <label for="technology" class="me-2">{{ $technology->name}}</label>  
+                @endforeach
+                
+            </div>
+
+
+
             @error('image')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror

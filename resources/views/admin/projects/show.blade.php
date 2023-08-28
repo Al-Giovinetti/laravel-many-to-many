@@ -7,6 +7,11 @@
             <ul class="list-unstyled p-3">
                 <li> <strong> ID </strong> {{ $project['id']}}</li>
                 <li> <strong>Title</strong> {{ $project['title']}}</li>
+
+                @if(count($project->technologies)>0)
+                    <li> <strong>Used technologies</strong> @dump($project->technologies)</li>
+                @endif
+
                 <li class="py-2">
                     @if(str_starts_with($project->image,'http'))
                         <img src="{{ $project->image }}" alt="image {{ $project->title }}">

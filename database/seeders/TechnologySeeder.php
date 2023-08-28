@@ -21,6 +21,6 @@ class TechnologySeeder extends Seeder
             $newTech->name = $technology;
             $newTech->color = $faker->unique()->hexColor();
             $newTech->save();
-;        }
+        }
     }
 }
