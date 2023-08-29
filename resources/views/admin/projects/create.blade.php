@@ -18,12 +18,11 @@
             @error('technologies')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-
             <div>
-                <label for="title" class="my-2 d-block"> <strong>Used technologies</strong></label>
+                <label class="my-2 d-block"> <strong>Used technologies</strong></label>
                 @foreach($technologies as $technology)
-                    <input type="checkbox" name="technology" id="technology" value="{{$technology->id }}">
-                    <label for="technology" class="me-2">{{ $technology->name}}</label>  
+                    <input type="checkbox" name="technologies[]" id="technologies" value="{{$technology->id }}">
+                    <label for="technologies" class="me-2">{{ $technology->name}}</label>  
                 @endforeach
                 
             </div>
