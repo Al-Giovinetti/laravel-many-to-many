@@ -34,7 +34,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $img_path = Storage::put('uploads',$request['image']);
 
         $data = $request->validate([
             'title'=> ['required','unique:projects','max:255'],
@@ -43,6 +42,8 @@ class ProjectController extends Controller
             'attachments'=> ['required','max:30'],
             'technologies'=>['exists:technologies,id']
         ]);
+
+        $img_path = Storage::put('uploads',$request['image']);
 
         $data['image']=$img_path;
 
@@ -105,6 +106,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         Storage::delete($project->image);
+        $project->technologies()->detach();
         $project->delete();
 
         return redirect()->route('admin.projects.index'); 
