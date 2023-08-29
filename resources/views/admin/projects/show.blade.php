@@ -9,7 +9,13 @@
                 <li> <strong>Title</strong> {{ $project['title']}}</li>
 
                 @if(count($project->technologies)>0)
-                    <li> <strong>Used technologies</strong> @dump($project->technologies)</li>
+                    <li> 
+                        <strong>Used technologies</strong>
+                        @dd($project->technologies)
+                        @foreach($project->technologies as $technology)
+                            {{ $technology->name}}
+                        @endforeach
+                    </li>
                 @endif
 
                 <li class="py-2">

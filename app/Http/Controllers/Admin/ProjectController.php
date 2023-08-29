@@ -48,8 +48,6 @@ class ProjectController extends Controller
 
         $newProject = Project::create($data);
 
-        $newProject->save();
-
         if($request->has('technologies')){
             $newProject->technologies()->sync($request->technologies);
         }
