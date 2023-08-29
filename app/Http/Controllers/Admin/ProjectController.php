@@ -69,7 +69,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $technologies = Technology :: all();
+        return view('admin.projects.edit', compact('project','technologies'));
     }
 
     /**
@@ -83,12 +84,15 @@ class ProjectController extends Controller
             'title'=>['required','min:3','max:255',Rule::unique('projects')->ignore($project->id)],
             'image'=>['required'],
             'description'=>['max:255'],
-            'attachments' =>['required','max:30']
+            'attachments' =>['required','max:30'],
+            'technologies'=>['exists:technologies,id']
         ]);
 
         Storage::delete($project->image);
 
         $data['image']=$img_path;
+
+        $project->technologies()->sync($request->technologies);
 
         $project->update($data);
 

@@ -10,6 +10,13 @@
                 <label for="title">Title</label> 
                 <input type="text" name="title" id="title" value="{{ $project->title }}">
             </div>
+            <div>
+                @foreach ($technologies as $technology)
+                    <input type="checkbox" name="technologies[]" id="technologies" value="{{ $technology->id }}" @if($project->technologies->contains($technology->id)) checked @endif>
+                    <label for="tags" class="form-check-label me-3">
+                        {{ $technology->name }}
+                    </label>
+                @endforeach
             <div class="d-flex flex-column">
                 <label for="title">Image</label> 
                 <input type="file" name="image" id="image" placeholder="insert your file">

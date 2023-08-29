@@ -11,7 +11,6 @@
                 @if(count($project->technologies)>0)
                     <li> 
                         <strong>Used technologies</strong>
-                        @dd($project->technologies)
                         @foreach($project->technologies as $technology)
                             {{ $technology->name}}
                         @endforeach
