@@ -78,23 +78,23 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $img_path = Storage::put('uploads',$request['image']);
-
         $data = $request->validate([
             'title'=>['required','min:3','max:255',Rule::unique('projects')->ignore($project->id)],
-            'image'=>['required'],
+            'image'=>['required','file'],
             'description'=>['max:255'],
-            'attachments' =>['required','max:30'],
+            'attachments' =>['required','max:2'],
             'technologies'=>['exists:technologies,id']
         ]);
+
+        $img_path = Storage::put('uploads',$request['image']);
 
         Storage::delete($project->image);
 
         $data['image']=$img_path;
 
-        $project->technologies()->sync($request->technologies);
-
         $project->update($data);
+
+        $project->technologies()->sync($request->technologies);
 
         return redirect()->route('admin.projects.show',compact('project'));
     }
