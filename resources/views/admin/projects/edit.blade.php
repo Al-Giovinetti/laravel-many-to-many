@@ -33,8 +33,22 @@
                 @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <label for="title">Image</label> 
-                <input type="file" name="image" id="image" placeholder="insert your file">
+                <div>
+                    <p>Select your image type</p>
+                    <input type="radio" name="img-type" id="img-type-url">
+                    <label for="img-type">URL</label>
+                    <input type="radio" name="img-type" id="img-type-file">
+                    <label for="img-type">Import your file</label>
+                </div>
+                <div class="d-none box-img-file">
+                    <label for="title">Image</label> 
+                    <input type="file" name="image" id="image" placeholder="insert your file">
+                </div>
+                <div class="d-none box-img-url">
+                    <label for="title">Image</label> 
+                    <input type="text" name="image" id="image" placeholder="insert your file">
+                </div>
+               
             </div>
 
             <div class="d-flex flex-column">
@@ -64,4 +78,32 @@
     </div>
 </div>
 
+@endsection
+
+@section('js_script')
+    <script>
+        const btnRadioUrl = document.getElementById('img-type-url');
+        const btnRadioFile = document.getElementById('img-type-file');
+        console.log(btnRadioFile)
+        const boxImgFile = document.querySelector('div.box-img-file');
+        const boxImgUrl = document.querySelector('div.box-img-url');
+
+        btnRadioUrl.addEventListener('click',function(){
+            if(btnRadioUrl.checked == true){
+                boxImgFile.classList.remove('d-block');
+                boxImgFile.classList.add('d-none');
+                boxImgUrl.classList.add('d-block');
+                boxImgUrl.classList.remove('d-none');
+            }
+        })
+
+        btnRadioFile.addEventListener('click',function(){
+            if(btnRadioFile.checked == true){
+                boxImgUrl.classList.remove('d-block');
+                boxImgUrl.classList.add('d-none');
+                boxImgFile.classList.add('d-block');
+                boxImgFile.classList.remove('d-none');
+            }
+        })
+    </script>
 @endsection
